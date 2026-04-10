@@ -83,6 +83,9 @@ Run hardhat tests:
 npx hardhat test # run all tests
 npx hardhat test test/Campaign.ts # run a specific test
 ```
+
+### For frontend integration, you need to deploy the contract.
+
 ### 6️⃣ Create Ignition Deployment Script
 Create a deployment module:
 ```bash
@@ -93,7 +96,6 @@ Create a deployment module:
 npx hardhat node
 ```
 ### 8️⃣ Deploy Contract (Local Network)
-For frontend integration, you DO need a deployed contract.
 ```bash
 npx hardhat ignition deploy ./ignition/modules/CampaignFactory.ts --network localhost
 ```

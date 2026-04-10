@@ -21,3 +21,12 @@
 
 # Hardhat deployment cache/state
 ignition/deployments/
+
+# Next.js build output
+/frontend/node_modules
+
+# Next.js environment variables
+/frontend/.env.local
+
+# Next.js build output
+/frontend/.next
