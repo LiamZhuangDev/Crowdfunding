@@ -39,3 +39,60 @@ This platform is designed to be extensible. Contributors can receive:
 - Hardhat 3 (ESM) — Development framework
 - Ethers.js — Blockchain interaction
 - TypeScript (optional) — Scripts and tooling
+
+## 🛠️ Project Setup (Step-by-Step)
+
+Follow these steps to initialize and run the crowdfunding project locally:
+
+### 1️⃣ Initialize Project
+```bash
+mkdir Crowdfunding
+cd Crowdfunding
+npm init -y
+```
+### 2️⃣ Install Hardhat
+```bash
+npm install --save-dev hardhat@latest
+```
+### 3️⃣ Initialize Hardhat (ESM Project)
+```bash
+npx hardhat --init
+```
+### 4️⃣ Create Smart Contracts
+Create your contract files inside:
+```bash
+/contracts
+```
+Example:
+```bash
+contracts/Campaign.sol
+contracts/CampaignFactory.sol
+```
+### 5️⃣ Test Smart Contracts
+Create your contract test files inside:
+```
+/test
+```
+Example:
+```
+test/Campaign.ts
+test/CampaignFactory.ts
+```
+Run hardhat tests:
+```bash
+npx hardhat test # run all tests
+npx hardhat test test/Campaign.ts # run a specific test
+```
+### 6️⃣ Create Ignition Deployment Script
+Create a deployment module:
+```bash
+/ignition/modules/CampaignFactory.ts
+```
+### 7️⃣ Start Local Hardhat Node
+```bash
+npx hardhat node
+```
+### 8️⃣ Deploy Contract (Local Network)
+```bash
+npx hardhat ignition deploy ./ignition/modules/CampaignFactory.ts --network localhost
+```
