@@ -149,3 +149,17 @@ You should see connected account address on the frontend page.
 - Import another pre-funded account and make a contribution
 - Withdrawal and
 - Refund
+```bash
+# fast-forward blockchain time to test withdrawal or refund
+await window.ethereum.request({
+  method: "evm_increaseTime",
+  params: [7 * 24 * 60 * 60],
+});
+
+await window.ethereum.request({
+  method: "evm_mine",
+  params: [],
+});
+
+MetaMask - RPC Error: The method "evm_increaseTime" does not exist / is not available.
+```
