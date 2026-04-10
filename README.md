@@ -83,19 +83,69 @@ Run hardhat tests:
 npx hardhat test # run all tests
 npx hardhat test test/Campaign.ts # run a specific test
 ```
-
+---
 ### For frontend integration, you need to deploy the contract.
 
-### 6️⃣ Create Ignition Deployment Script
+### 1️⃣ Create Ignition Deployment Script
 Create a deployment module:
 ```bash
 /ignition/modules/CampaignFactory.ts
 ```
-### 7️⃣ Start Local Hardhat Node
+### 2️⃣ Start Local Hardhat Node
+It gives 10+ pre-funded accounts (each with 10,000 ETH). 
 ```bash
 npx hardhat node
 ```
-### 8️⃣ Deploy Contract (Local Network)
+### 3️⃣ Deploy Contract (Local Network)
 ```bash
 npx hardhat ignition deploy ./ignition/modules/CampaignFactory.ts --network localhost
 ```
+### 4️⃣ Create Application Binary Interface (ABI) for contracts
+Example:
+```bash
+/frontend/lib/abis.ts
+```
+### 5️⃣ Create Frontend code
+Example:
+```bash
+/frontend
+```
+### 6️⃣ Starts localhost
+```bash
+cd frontend
+npm run dev # which run `next dev` in package.json
+```
+Then access the frontend webpage via http://localhost:3000/
+Next set up Metamask for testing.
+
+---
+
+### 7️⃣ Import pre-funded accounts into Metamask wallet
+```
+Account Dropdown -> Add wallet Button -> Import Account -> Input the private key of a pre-funded account
+```
+Then switch to this account.
+### 8️⃣ Connect the wallet to the local node
+MetaMask / Ethereum provider (EIP-1193) API calls:
+```bash
+# check current chain id
+await window.ethereum.request({ method: "eth_chainId" })
+
+# Switch to local node (chain id: 31337, 0x7a69 in hex)
+await window.ethereum.request({
+  method: "wallet_switchEthereumChain",
+  params: [{ chainId: "0x7a69" }],
+})
+```
+### 9️⃣ Connect to Metamask Wallet on frontend page
+```
+Click Connect Wallet button on the top right corner.
+Approve the request in Metamask wallet.
+You should see connected account address on the frontend page.
+```
+### 🔟 Test compaign functions
+- Create a Compaign
+- Start the Compaign
+- Import another pre-funded account and make a contribution
+- Withdrawal and
+- Refund
