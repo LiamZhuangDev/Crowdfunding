@@ -163,3 +163,36 @@ await window.ethereum.request({
 
 MetaMask - RPC Error: The method "evm_increaseTime" does not exist / is not available.
 ```
+---
+Deploy Contract to Sepolia testnet
+### 1️⃣ Create .env file to store the Sepolia URL and private key
+```
+# Get RPC URL from https://infura.io or https://alchemy.com 
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/xxx...xxx
+
+# Sepolia private key (must start from 0x)
+SEPOLIA_PRIVATE_KEY=0xyyy...yyy
+```
+### 2️⃣ Load Sepolia env vars in Hardhat config file
+```
+import { defineConfig } from "hardhat/config";
+import "dotenv/config"; // must here if read from .env directly
+
+export default defineConfig({
+  ...typescript
+  networks: {
+    ...
+    sepolia: {
+      type: "http",
+      chainType: "l1",
+      url: process.env.SEPOLIA_RPC_URL!, // read URL from .env
+      accounts: [process.env.SEPOLIA_PRIVATE_KEY!], // read private key from .env
+    },
+  },
+});
+```
+### 3️⃣ Deploy the contract to Sepolia testnet
+```bash
+npx hardhat ignition deploy ./ignition/modules/CampaignFactory.ts --network sepolia
+```
+
